@@ -50,25 +50,13 @@ export default function TaskBoard() {
       </div>
       <div className="kanban-board">
         {categories.map((category) => (
-          <div
-            className="board"
-            key={category.id}
-            onDragOver={(e) => onDragOver(e)}
-            onDrop={(e) => {
-              onDrop(e, category.id);
-            }}
-          >
+          <div className="board" key={category.id} onDragOver={(e) => onDragOver(e)} onDrop={(e) => { onDrop(e, category.id); }} >
             <div className="board-header">
               <strong>{category.name}</strong>
             </div>
             <div className="board-body">
               {category?.tasks?.map((task) => (
-                <div
-                  key={task.id}
-                  className="task"
-                  onDragStart={(e) => onDragStart(e, task)}
-                  draggable
-                >
+                <div key={task.id} className="task" onDragStart={(e) => onDragStart(e, task)} draggable >
                   <span>{task.name}</span>
                 </div>
               ))}
