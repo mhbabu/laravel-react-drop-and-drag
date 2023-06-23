@@ -6,8 +6,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
 import ProtectedRoute from "./component/common/protectedRoute";
 import TaskBoard from './pages/task-board/taskBoard';
-import TaskCategoryList from "./pages/task-board/task-category";
-import CreateTaskCategory from "./pages/task-board/task-category/create";
 
 function App() {
 
@@ -24,8 +22,6 @@ function App() {
                 <Route path='/' element={<Login />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/task-boards' element={ <ProtectedRoute> <TaskBoard /> </ProtectedRoute> } />
-                <Route path='/task-categories' element={ <ProtectedRoute> <TaskCategoryList /> </ProtectedRoute> } />
-                <Route path='/task-categories/create' element={ <ProtectedRoute> <CreateTaskCategory /> </ProtectedRoute> } />
               </Routes>
             </div>
           </div>
