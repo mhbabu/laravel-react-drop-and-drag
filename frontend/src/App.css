@@ -1,0 +1,61 @@
+.container {
+  width: 70%;
+  min-width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+.marginY{
+  margin: 30px 0px;
+}
+.kanban-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: sans-serif;
+}
+
+.kanban-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: sans-serif;
+}
+
+.board{
+  background-color: bisque;
+  width: 30.5%;
+  min-width: 14rem;
+  min-height: 4.5rem;
+  border-radius: 0.3rem;
+}
+
+.board-header {
+  background-color: white;
+  border: 0.1rem solid black;
+  padding: 10px 0px;
+  text-align: center;
+}
+
+.board-body{
+  padding: 0.6rem;
+  min-height: 4.5rem;
+  border-radius: 0.3rem;
+}
+
+.task {
+  background-color: white;
+  margin: 0.2rem 0rem 0.3rem 0rem;
+  border: 0.1rem solid black;
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.2rem 0.5rem 2rem;
+}
+
+.button {
+  margin-left: 20px;
+  background-color: white;
+  border-radius: 0.2rem;
+  padding: 0.5rem 2rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
