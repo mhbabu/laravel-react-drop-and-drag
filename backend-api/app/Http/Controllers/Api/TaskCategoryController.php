@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskCategoryResource;
 use App\Models\TaskCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -13,10 +14,15 @@ use Symfony\Component\HttpFoundation\Response;
 class TaskCategoryController extends Controller{
 
     public function index(){
-        $taskCategories = TaskCategory::with(['tasks' => function($query){
+
+        $query = TaskCategory::with(['tasks' => function($query){
+            if(auth()->id() !== 1){
+                $query->whereIn('id', auth()->user()->tasks->pluck('id'));
+            }
             $query->orderBy('id', 'desc');
         }])->get();
-        return response(['data' => TaskCategoryResource::collection($taskCategories)], Response::HTTP_OK);
+
+        return response(['data' => TaskCategoryResource::collection($query)], Response::HTTP_OK);
     }
 
     public function store(Request $request){
