@@ -13,7 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 class TaskCategoryController extends Controller{
 
     public function index(){
-        $taskCategories = TaskCategory::get();
+        $taskCategories = TaskCategory::with(['tasks' => function($query){
+            $query->orderBy('id', 'desc');
+        }])->get();
         return response(['data' => TaskCategoryResource::collection($taskCategories)], Response::HTTP_OK);
     }
 

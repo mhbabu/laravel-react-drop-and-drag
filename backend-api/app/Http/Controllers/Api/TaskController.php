@@ -13,7 +13,7 @@ class TaskController extends Controller{
 
     public function index(){
 
-        $tasks = Task::all();
+        $tasks = Task::orderBy('id', 'desc')->all();
 
         if ($tasks->count() == 0) {
             return response()->json(['data' => []], 404);
@@ -34,7 +34,7 @@ class TaskController extends Controller{
 
         if ($validator->fails()) {
             $errors = $validator->errors();
-            return response()->json(['error' => $errors], 400);
+            return response()->json(['error' => $errors], 422);
         }
 
         $task = Task::create([
@@ -42,7 +42,7 @@ class TaskController extends Controller{
             'name' => $request->input('name')
         ]);
 
-        return response(['message' =>'Task created successfully','data' => new TaskResource($task)], Response::HTTP_CREATED);
+        return response(['message' =>'Task created successfully','data' => $task], Response::HTTP_CREATED);
     }
 
     public function show($id)

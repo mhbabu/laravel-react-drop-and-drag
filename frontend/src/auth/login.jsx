@@ -17,8 +17,8 @@ export default function Login() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      await auth.login(formData.email, formData.password);
-      navigate('/task-boards');
+        await auth.login(formData.email, formData.password);
+        navigate('/task-boards');
     } catch (ex) {
       if (ex.response && ex.response.status === 422) {
         const errors = { ...formErrors };

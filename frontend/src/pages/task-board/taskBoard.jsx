@@ -4,11 +4,11 @@ import { getTaskCategories } from "../../services/task-category/taskCategoryServ
 import { saveTask } from "../../services/task/taskService";
 import "../../App.css";
 import Task from "../task";
-import Input from "../../component/common/input";
 import AddMore from "../../component/addMore";
 
 export default function TaskBoard() {
   const [categories, setCategories] = useState([]);
+  const [newItem, setNewItem] = useState(false);
 
   // When Drag Over
   const onDragOver = (ev) => {
@@ -25,9 +25,7 @@ export default function TaskBoard() {
       const removeTaskIndex = tempCategories[categoryIndex].tasks.findIndex( (task) => task.id === selectedItem.id ); // find the selected item task index
       const removeTask = tempCategories[categoryIndex].tasks.splice( removeTaskIndex, 1); // remove task from existing category
       const updatedItemTask = { ...removeTask[0], category_id: destinationId }; //new task with updated category where task dropped
-      tempCategories
-        .find((category) => category.id === destinationId)
-        .tasks.push(updatedItemTask); // update original category items
+      tempCategories.find((category) => category.id === destinationId).tasks.push(updatedItemTask); // update original category items
       saveTask(updatedItemTask);
       setCategories(tempCategories);
     }
@@ -39,8 +37,12 @@ export default function TaskBoard() {
   };
 
   useEffect(() => {
-    data();
-  }, []);
+    if(categories.length === 0) data();
+    if(newItem){
+      data();
+      setNewItem(false);
+    }
+  }, [categories, newItem]);
 
   return (
     <div className="container mt-3">
@@ -60,7 +62,7 @@ export default function TaskBoard() {
                     ))}
                   </div>
                 </div>
-                <AddMore key={index} item={category} data={categories} setData={setCategories} />
+                <AddMore key={index} item={category} setNewItem={setNewItem} />
               </div>
             ))}
           </div>

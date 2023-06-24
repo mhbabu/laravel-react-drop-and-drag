@@ -10,6 +10,7 @@ http.setBearerToken(getBearerToken());
 export async function login(email, password) {
   const { data }  = await http.post(loginEndPoint, { email, password });
   localStorage.setItem(tokenKey, JSON.stringify(data));
+  http.setBearerToken(getBearerToken());
 }
 
 export async function register(user) {
@@ -20,6 +21,7 @@ export async function register(user) {
   });
 
   localStorage.setItem(tokenKey, JSON.stringify(data));
+  http.setBearerToken(getBearerToken());
 
 }
 

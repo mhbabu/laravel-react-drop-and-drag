@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\TaskCategory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TaskResource extends JsonResource
