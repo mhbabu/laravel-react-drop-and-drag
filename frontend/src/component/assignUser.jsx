@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 
 export default function AssignUser({ show, setShow, data }) {
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [assignedUsers, setAssignedUsers] = useState([]);
   const [users, setUsers] = useState([]);
 
   const handleClose = (event) => {
@@ -34,9 +33,10 @@ export default function AssignUser({ show, setShow, data }) {
 
   const userList = async () => {
     const users = await getUserList();
-    const {data:result} = await getAssignTaskUsers(data?.id);
-    setAssignedUsers(result?.data)
     setUsers(users);
+
+    const {data: result} = await getAssignTaskUsers(data?.id);
+    setSelectedUsers(result?.data)
   };
 
   useEffect(() => {
@@ -52,7 +52,6 @@ export default function AssignUser({ show, setShow, data }) {
               data={users}
               onChange={handleSelectChange}
               value={selectedUsers}
-              selectedData={assignedUsers}
               placeholder="Select Users"
             />
           </div>
