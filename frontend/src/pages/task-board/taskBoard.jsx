@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { getTaskCategories } from "../../services/task-category/taskCategoryService";
 import { saveTask } from "../../services/task/taskService";
-import "../../App.css";
-import Task from "../task";
 import AddMore from "../../component/addMore";
+import Task from "../../component/task";
+import "../../App.css";
 
 export default function TaskBoard() {
   const [categories, setCategories] = useState([]);
