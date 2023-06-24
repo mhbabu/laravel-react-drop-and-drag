@@ -1,5 +1,9 @@
+import { useState } from "react";
+import Popup from "./popup";
 
 export default function Task({ data: task }) {
+
+  const [show, setShow] = useState(false);
   // When Drag Start
   const onDragStart = (ev, task) => {
     ev.dataTransfer.setData("task", JSON.stringify(task)); // Set Data in JSON stringify formatted.
@@ -7,11 +11,17 @@ export default function Task({ data: task }) {
 
   const handleClick = () =>{
     console.log('clicked');
+    setShow(true);
   }
 
   return (
-    <div className="bg-white p-2 border rounded mb-2" onDragStart={(e) => onDragStart(e, task)} draggable onClick={handleClick}>
-      <span>{task.name}</span>
-    </div>
+    <>
+      <div className="bg-white p-2 border rounded mb-2" onDragStart={(e) => onDragStart(e, task)} draggable onClick={handleClick}>
+        <span>{task.name}</span>
+      </div>
+      <Popup title="Assign Users" show={show} setShow={setShow} data={task}>
+        <p>This is modal body</p>
+      </Popup>
+    </>
   );
 }
