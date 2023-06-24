@@ -107,7 +107,37 @@ class TaskController extends Controller{
     }
 
     public function taskAssign(Request $request){
-        return $request->all();
+
+        $validator = Validator::make($request->all(), [
+            'task_id'  => 'required|exists:tasks,id',
+            'users'    => 'required|array|distinct',
+            'users.*'  => 'required|exists:users,id'
+        ],[],[
+            'task_id' => 'task'
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json(['error' => $errors], 422);
+        }
+        $task = Task::find($request->task_id);
+        $task->users()->sync($request->users);
+
+        return response([
+            'message' => 'User assigned successfully',
+        ], Response::HTTP_OK);
+    }
+
+    public function taskUsers(Task $task)
+    {
+       $users = $task->users->map(function ($user) {
+            return [
+                "value" => $user->id,
+                "label" => $user->name
+            ];
+        });
+
+        return response()->json(['data' => $users], Response::HTTP_OK);
     }
 
 

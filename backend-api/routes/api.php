@@ -27,5 +27,6 @@ Route::prefix('auth-user')->middleware('auth:sanctum')->group( function () {
     Route::resource('task-categories', TaskCategoryController::class);
     Route::resource('tasks', TaskController::class);
     Route::post('tasks-assign', [TaskController::class, 'taskAssign']);
+    Route::get('tasks/{task}/users', [TaskController::class, 'taskUsers']);
 
 });

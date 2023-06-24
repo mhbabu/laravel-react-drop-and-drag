@@ -32,3 +32,7 @@ export function deleteTask(taskId) {
 export function assignTaskToUsers(taskAssignUsers) {
   return http.post(assignTaskEndPoint, taskAssignUsers);
 }
+
+export function getAssignTaskUsers(id) {
+  return http.get( config.apiUrl + "/auth-user/tasks/" + id + "/users");
+}

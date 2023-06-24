@@ -10,7 +10,6 @@ export default function Task({ data: task }) {
   };
 
   const handleClick = () => {
-    console.log("clicked");
     setShow(true);
   };
 

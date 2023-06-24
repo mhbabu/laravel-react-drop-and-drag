@@ -1,12 +1,14 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getTaskCategories } from "../../services/task-category/taskCategoryService";
 import { saveTask } from "../../services/task/taskService";
 import AddMore from "../../component/addMore";
 import Task from "../../component/task";
+import {useNavigate} from 'react-router-dom';
 import "../../App.css";
+import { logout } from "../../services/auth/authService";
 
 export default function TaskBoard() {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [newItem, setNewItem] = useState(false);
 
@@ -31,6 +33,14 @@ export default function TaskBoard() {
     }
   };
 
+  const handleLogOut = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const data = async () => {
     const { data } = await getTaskCategories();
     setCategories(data?.data);
@@ -47,8 +57,11 @@ export default function TaskBoard() {
   return (
     <div className="container mt-3">
       <div className="card">
+          <div className="card-header text-center justify-content-between"> 
+            <h5>Task Board</h5>
+            <p onClick={handleLogOut} style={{ cursor: "pointer" }}><i className="fa fa-user"></i> Logout</p>
+          </div>
         <div className="card-body">
-          <div className="card-header text-center"> Task Board </div>
           <div className="row mt-2">
             {categories.map((category, index) => (
               <div className="col-4" key={category.id}>

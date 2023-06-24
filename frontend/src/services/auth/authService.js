@@ -32,6 +32,7 @@ export async function register(user) {
 }
 
 export function logout() {
+  http.post(config.apiUrl + "/auth-user/logout");
   localStorage.removeItem(tokenKey);
 }
 
