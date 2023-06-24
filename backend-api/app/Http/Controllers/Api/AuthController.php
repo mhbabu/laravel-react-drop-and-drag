@@ -15,7 +15,7 @@ class AuthController extends Controller{
 
     public function userList(){
 
-        $users   = User::all();
+        $users = User::whereNotIn('id', [1])->get(); // id = 1 System Admin in this purpose
 
         if ($users->count() == 0) {
             return response()->json(['data' => []], 404);

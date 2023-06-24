@@ -3,9 +3,15 @@ import config from "../../config.json";
 
 const loginEndPoint = config.apiUrl + "/user/login";
 const registerEndPoint = config.apiUrl + "/user/register";
+const userListEndPoint = config.apiUrl + "/auth-user/list";
 const tokenKey = "user";
 
 http.setBearerToken(getBearerToken());
+
+export async function getUserList() {
+  const { data }  = await http.get(userListEndPoint);
+  return data?.data;
+}
 
 export async function login(email, password) {
   const { data }  = await http.post(loginEndPoint, { email, password });

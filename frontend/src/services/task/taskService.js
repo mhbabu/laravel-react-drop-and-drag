@@ -2,6 +2,7 @@ import http from "../httpService";
 import config from "../../config.json";
 
 const apiEndPoint = config.apiUrl + "/auth-user/tasks";
+const assignTaskEndPoint = config.apiUrl + "/auth-user/tasks-assign";
 
 function getTaskUrl(id) {
   return `${apiEndPoint}/${id}`;
@@ -26,4 +27,8 @@ export function saveTask(task) {
 
 export function deleteTask(taskId) {
   return http.delete(getTaskUrl(taskId));
+}
+
+export function assignTaskToUsers(taskAssignUsers) {
+  return http.post(assignTaskEndPoint, taskAssignUsers);
 }

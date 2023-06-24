@@ -106,5 +106,9 @@ class TaskController extends Controller{
 
     }
 
+    public function taskAssign(Request $request){
+        return $request->all();
+    }
+
 
 }
